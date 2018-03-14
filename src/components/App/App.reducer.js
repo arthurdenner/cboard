@@ -1,4 +1,8 @@
-import { FINISH_FIRST_VISIT } from './App.constants';
+import {
+  CHANGE_ACTIVE_VIEW,
+  FINISH_FIRST_VISIT,
+  RESET_ACTIVE_VIEW
+} from './App.constants';
 import {
   LOGIN_ERROR,
   LOGIN_REQUEST,
@@ -13,7 +17,8 @@ import {
 const initialState = {
   isFirstVisit: true,
   isLogging: false,
-  isSigningUp: false
+  isSigningUp: false,
+  activeView: ''
 };
 
 function appReducer(state = initialState, action) {
@@ -44,6 +49,16 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         isSigningUp: false
+      };
+    case CHANGE_ACTIVE_VIEW:
+      return {
+        ...state,
+        activeView: action.payload
+      };
+    case RESET_ACTIVE_VIEW:
+      return {
+        ...state,
+        activeView: ''
       };
     default:
       return state;

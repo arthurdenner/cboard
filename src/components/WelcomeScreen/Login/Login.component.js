@@ -21,7 +21,6 @@ class Login extends Component {
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
-    isDialogOpen: PropTypes.bool.isRequired,
     isLogging: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired
   };
@@ -32,17 +31,12 @@ class Login extends Component {
       handleChange,
       handleSubmit,
       intl,
-      isDialogOpen,
       isLogging,
       onClose
     } = this.props;
 
     return (
-      <Dialog
-        open={isDialogOpen}
-        onClose={onClose}
-        aria-labelledby="welcome-screen-login"
-      >
+      <Dialog open onClose={onClose} aria-labelledby="welcome-screen-login">
         <DialogTitle id="welcome-screen-login">Login</DialogTitle>
         <DialogContent>
           <form className="Login__form" onSubmit={handleSubmit}>

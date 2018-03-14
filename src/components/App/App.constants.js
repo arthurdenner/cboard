@@ -1,4 +1,6 @@
 // action types constants
+export const CHANGE_ACTIVE_VIEW = 'cboard/App/CHANGE_ACTIVE_VIEW';
+export const RESET_ACTIVE_VIEW = 'cboard/App/RESET_ACTIVE_VIEW';
 export const FINISH_FIRST_VISIT = 'cboard/App/FINISH_FIRST_VISIT';
 
 // language constants
