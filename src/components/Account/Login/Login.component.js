@@ -23,7 +23,6 @@ class Login extends Component {
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
-    isDialogOpen: PropTypes.bool.isRequired,
     isLogging: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired
   };
@@ -35,13 +34,12 @@ class Login extends Component {
       handleChange,
       handleSubmit,
       intl,
-      isDialogOpen,
       isLogging,
       onClose
     } = this.props;
 
     return (
-      <Dialog open={isDialogOpen} onClose={onClose} aria-labelledby="login">
+      <Dialog open onClose={onClose} aria-labelledby="login">
         <DialogTitle id="login">Login</DialogTitle>
         <DialogContent>
           <div

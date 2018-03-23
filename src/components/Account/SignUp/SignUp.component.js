@@ -35,7 +35,6 @@ class SignUp extends Component {
       errors,
       handleChange,
       handleSubmit,
-      isDialogOpen,
       isSigningUp,
       langs,
       onClose,
@@ -44,7 +43,7 @@ class SignUp extends Component {
     } = this.props;
 
     return (
-      <Dialog open={isDialogOpen} onClose={onClose} aria-labelledby="sign-up">
+      <Dialog open onClose={onClose} aria-labelledby="sign-up">
         <DialogTitle id="sign-up">
           <FormattedMessage {...messages.signUp} />
         </DialogTitle>

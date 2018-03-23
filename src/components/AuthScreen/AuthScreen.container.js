@@ -8,36 +8,17 @@ import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
 import messages from './AuthScreen.messages';
-import { finishFirstVisit } from '../App/App.actions';
+import { handleActiveView } from '../App/App.actions';
 import Information from './Information';
-import Login from '../Account/Login';
-import SignUp from '../Account/SignUp';
 import './AuthScreen.css';
 
 class AuthScreen extends Component {
-  state = {
-    activeView: ''
-  };
-
   static propTypes = {
-    finishFirstVisit: PropTypes.func.isRequired
-  };
-
-  handleActiveView = activeView => {
-    this.setState({
-      activeView
-    });
-  };
-
-  resetActiveView = () => {
-    this.setState({
-      activeView: ''
-    });
+    handleActiveView: PropTypes.func.isRequired
   };
 
   render() {
-    const { history } = this.props;
-    const { activeView } = this.state;
+    const { handleActiveView, history } = this.props;
 
     return (
       <Dialog fullScreen open onClose={history.goBack}>
@@ -57,7 +38,7 @@ class AuthScreen extends Component {
               <Button
                 className="AuthScreen__button AuthScreen__button--login"
                 variant="raised"
-                onClick={() => this.handleActiveView('login')}
+                onClick={() => handleActiveView('login')}
               >
                 <FormattedMessage {...messages.login} />
               </Button>
@@ -65,20 +46,12 @@ class AuthScreen extends Component {
                 className="AuthScreen__button AuthScreen__button--signup"
                 variant="raised"
                 color="primary"
-                onClick={() => this.handleActiveView('signup')}
+                onClick={() => handleActiveView('signup')}
               >
                 <FormattedMessage {...messages.signUp} />
               </Button>
             </footer>
           </div>
-          <Login
-            isDialogOpen={activeView === 'login'}
-            onClose={this.resetActiveView}
-          />
-          <SignUp
-            isDialogOpen={activeView === 'signup'}
-            onClose={this.resetActiveView}
-          />
         </div>
       </Dialog>
     );
@@ -86,7 +59,7 @@ class AuthScreen extends Component {
 }
 
 const mapDispatchToProps = {
-  finishFirstVisit
+  handleActiveView
 };
 
 export default connect(null, mapDispatchToProps)(AuthScreen);
