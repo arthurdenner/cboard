@@ -5,32 +5,13 @@ import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
 
 import IconButton from '../UI/IconButton';
-import Login from '../Account/Login';
-import SignUp from '../Account/SignUp';
 import messages from './AuthScreen.messages';
 import Information from './Information';
 import './AuthScreen.css';
 
 class AuthScreen extends Component {
-  state = {
-    activeView: ''
-  };
-
-  handleActiveView = activeView => {
-    this.setState({
-      activeView
-    });
-  };
-
-  resetActiveView = () => {
-    this.setState({
-      activeView: ''
-    });
-  };
-
   render() {
     const { history } = this.props;
-    const { activeView } = this.state;
 
     return (
       <Dialog fullScreen open onClose={history.goBack}>
@@ -62,14 +43,6 @@ class AuthScreen extends Component {
               </Button>
             </footer>
           </div>
-          <Login
-            isDialogOpen={activeView === 'login'}
-            onClose={this.resetActiveView}
-          />
-          <SignUp
-            isDialogOpen={activeView === 'signup'}
-            onClose={this.resetActiveView}
-          />
         </div>
       </Dialog>
     );

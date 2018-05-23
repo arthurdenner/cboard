@@ -5,36 +5,18 @@ import { FormattedMessage } from 'react-intl';
 import Button from '@material-ui/core/Button';
 
 import messages from './WelcomeScreen.messages';
-import { finishFirstVisit } from '../App/App.actions';
+import { changeActiveView, finishFirstVisit } from '../App/App.actions';
 import Information from './Information';
-import Login from '../Account/Login';
-import SignUp from '../Account/SignUp';
 import './WelcomeScreen.css';
 
 class WelcomeScreen extends Component {
-  state = {
-    activeView: ''
-  };
-
   static propTypes = {
+    changeActiveView: PropTypes.func.isRequired,
     finishFirstVisit: PropTypes.func.isRequired
   };
 
-  handleActiveView = activeView => {
-    this.setState({
-      activeView
-    });
-  };
-
-  resetActiveView = () => {
-    this.setState({
-      activeView: ''
-    });
-  };
-
   render() {
-    const { finishFirstVisit } = this.props;
-    const { activeView } = this.state;
+    const { changeActiveView, finishFirstVisit } = this.props;
 
     return (
       <div className="WelcomeScreen">
@@ -46,7 +28,7 @@ class WelcomeScreen extends Component {
             <Button
               className="WelcomeScreen__button WelcomeScreen__button--login"
               variant="raised"
-              onClick={() => this.handleActiveView('login')}
+              onClick={() => changeActiveView('login')}
             >
               <FormattedMessage {...messages.login} />
             </Button>
@@ -54,7 +36,7 @@ class WelcomeScreen extends Component {
               className="WelcomeScreen__button WelcomeScreen__button--signup"
               variant="raised"
               color="primary"
-              onClick={() => this.handleActiveView('signup')}
+              onClick={() => changeActiveView('signup')}
             >
               <FormattedMessage {...messages.signUp} />
             </Button>
@@ -67,20 +49,13 @@ class WelcomeScreen extends Component {
             </Button>
           </footer>
         </div>
-        <Login
-          isDialogOpen={activeView === 'login'}
-          onClose={this.resetActiveView}
-        />
-        <SignUp
-          isDialogOpen={activeView === 'signup'}
-          onClose={this.resetActiveView}
-        />
       </div>
     );
   }
 }
 
 const mapDispatchToProps = {
+  changeActiveView,
   finishFirstVisit
 };
 

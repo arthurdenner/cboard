@@ -10,6 +10,8 @@ import Notifications from '../Notifications';
 import NotFound from '../NotFound';
 import Settings from '../Settings';
 import WelcomeScreen from '../WelcomeScreen';
+import Login from '../Account/Login';
+import SignUp from '../Account/SignUp';
 import './App.css';
 
 export class App extends Component {
@@ -29,11 +31,22 @@ export class App extends Component {
     /**
      * App language
      */
-    lang: PropTypes.string.isRequired
+    lang: PropTypes.string.isRequired,
+    /**
+     * Resets the activeView to an empty string
+     */
+    resetActiveView: PropTypes.func.isRequired
   };
 
   render() {
-    const { lang, dir, isFirstVisit, isLogged } = this.props;
+    const {
+      activeView,
+      lang,
+      dir,
+      isFirstVisit,
+      isLogged,
+      resetActiveView
+    } = this.props;
 
     return (
       <div className="App">
@@ -59,6 +72,9 @@ export class App extends Component {
           <Route path="/activate/:url" component={Activate} />
           <Route component={NotFound} />
         </Switch>
+
+        {activeView === 'login' && <Login onClose={resetActiveView} />}
+        {activeView === 'signup' && <SignUp onClose={resetActiveView} />}
       </div>
     );
   }

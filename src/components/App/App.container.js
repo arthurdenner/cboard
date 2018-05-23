@@ -5,12 +5,17 @@ import { injectIntl, intlShape } from 'react-intl';
 
 import registerServiceWorker from '../../registerServiceWorker';
 import { showNotification } from '../Notifications/Notifications.actions';
+import { resetActiveView } from './App.actions';
 import { isFirstVisit, isLogged } from './App.selectors';
 import messages from './App.messages';
 import App from './App.component';
 
 export class AppContainer extends Component {
   static propTypes = {
+    /**
+     * Contains the current view (login or signup)
+     */
+    activeView: PropTypes.string.isRequired,
     /**
      * App language direction
      */
@@ -51,20 +56,30 @@ export class AppContainer extends Component {
   };
 
   render() {
-    const { dir, isFirstVisit, isLogged, lang } = this.props;
+    const {
+      activeView,
+      dir,
+      isFirstVisit,
+      isLogged,
+      lang,
+      resetActiveView
+    } = this.props;
 
     return (
       <App
+        activeView={activeView}
         dir={dir}
         isFirstVisit={isFirstVisit}
         isLogged={isLogged}
         lang={lang}
+        resetActiveView={resetActiveView}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
+  activeView: state.app.activeView,
   dir: state.language.dir,
   isFirstVisit: isFirstVisit(state),
   isLogged: isLogged(state),
@@ -72,6 +87,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  resetActiveView,
   showNotification
 };
 

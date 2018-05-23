@@ -1,4 +1,9 @@
-import { FINISH_FIRST_VISIT, UPDATE_CONNECTIVITY } from './App.constants';
+import {
+  CHANGE_ACTIVE_VIEW,
+  FINISH_FIRST_VISIT,
+  RESET_ACTIVE_VIEW,
+  UPDATE_CONNECTIVITY
+} from './App.constants';
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -17,6 +22,7 @@ import {
 } from '../Account/Activate/Activate.constants';
 
 const initialState = {
+  activeView: '',
   isActivating: true,
   isConnected: true,
   isFirstVisit: true,
@@ -88,6 +94,16 @@ function appReducer(state = initialState, action) {
         ...state,
         activationStatus: action.payload || {},
         isActivating: false
+      };
+    case CHANGE_ACTIVE_VIEW:
+      return {
+        ...state,
+        activeView: action.payload
+      };
+    case RESET_ACTIVE_VIEW:
+      return {
+        ...state,
+        activeView: ''
       };
     default:
       return state;
